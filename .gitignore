@@ -7,3 +7,10 @@
 /build
 /captures
 .externalNativeBuild
+/*/out
+/*/*/build
+/*/*/production
+*.iws
+*.ipr
+*~
+*.swp

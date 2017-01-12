@@ -12,7 +12,7 @@
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/botonRojo"
+        app:srcCompat="@drawable/boton_rojo"
         android:id="@+id/imageButtonJugar"
         android:background="@null"
         android:layout_centerVertical="true"
