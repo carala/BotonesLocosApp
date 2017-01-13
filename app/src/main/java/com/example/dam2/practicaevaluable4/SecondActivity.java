@@ -16,7 +16,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class SecondActivity extends AppCompatActivity implements View.OnClickListener{
+public class SecondActivity extends AppCompatActivity implements View.OnClickListener, CustomDialog.OnFragmentoDialogoListener{
 
     private TextView textViewUsuario;
     private TextView textViewFase;
@@ -66,9 +66,13 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
         contadorBotones = 1;
 
-        
-        task = new MyAsyncTask();
-        task.execute(tiempo);
+
+        CustomDialog customDialog = CustomDialog.newInstance();
+        customDialog.setOnFragmentoDialogoListener(this);
+        customDialog.show(getFragmentManager(),null);
+
+
+
 
     }
 
@@ -113,6 +117,23 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             arr.set(r,tmp);
         }
         return arr;
+    }
+
+    @Override
+    public void onOpcionElegida(String nombre, int dificultad) {
+
+        textViewUsuario.setText(nombre);
+        if(dificultad == 1){
+            this.tiempo = 100;
+        }else if(dificultad == 2){
+            this.tiempo = 75;
+        }else if(dificultad == 3){
+            this.tiempo = 50;
+        }
+
+        task = new MyAsyncTask();
+        task.execute(tiempo);
+
     }
 
     private class MyAsyncTask extends AsyncTask<Integer, Integer, Integer> {

@@ -17,7 +17,7 @@ import android.widget.TextView;
  * Created by dam2 on 13/01/2017.
  */
 
-public class CustomDialog extends DialogFragment implements DialogInterface.OnClickListener, View.OnClickListener{
+public class CustomDialog extends DialogFragment implements View.OnClickListener{
 
     private Button buttonJugar;
     private Button buttonVolver;
@@ -29,11 +29,16 @@ public class CustomDialog extends DialogFragment implements DialogInterface.OnCl
     private RadioButton radio2;
     private RadioButton radio3;
     private OnFragmentoDialogoListener escuchador;
+    private int dificultad;
+    private String nombre;
 
 
     public static CustomDialog newInstance() {
+        Bundle args = new Bundle();
         CustomDialog fragment = new CustomDialog();
+        fragment.setArguments(args);
         return fragment;
+
     }
 
     @Override
@@ -43,9 +48,7 @@ public class CustomDialog extends DialogFragment implements DialogInterface.OnCl
         //Primero genero un constructor de diálogos de alerta
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-
-        builder.setView(inflater.inflate(R.layout.custom_dialog,null));
+        View customDialog = getActivity().getLayoutInflater().inflate(R.layout.custom_dialog, null);
 
         buttonJugar = (Button) getActivity().findViewById(R.id.buttonJugar);
         buttonVolver = (Button) getActivity().findViewById(R.id.buttonVolver);
@@ -59,27 +62,30 @@ public class CustomDialog extends DialogFragment implements DialogInterface.OnCl
 
         buttonJugar.setOnClickListener(this);
         buttonVolver.setOnClickListener(this);
-        /*radio1.setOnClickListener(this);
-        radio2.setOnClickListener(this);
-        radio3.setOnClickListener(this);*/
 
+        builder.setView(customDialog);
 
-
+        AlertDialog dialog = builder.setTitle("Botones Locos").create();
+        dialog.setCanceledOnTouchOutside(false);
 
         //Devuelvo el AlertDialog ya configurado
         return builder.create();
     }
 
-
-    @Override
-    public void onClick(DialogInterface dialogInterface, int i) {
-
-    }
-
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.buttonJugar) {
-            escuchador.onOpcionElegida(textViewNombre.getText().toString(), grupoBotones.getCheckedRadioButtonId());
+            if(radio1.isChecked()){
+                this.dificultad = 1 ;
+            }else if(radio2.isChecked()){
+                this.dificultad = 2 ;
+            }else if(radio3.isChecked()){
+                this.dificultad = 3 ;
+            }
+            this.nombre = editTextNombre.getText().toString();
+
+            escuchador.onOpcionElegida(nombre,dificultad);
+            dismiss();
         }
     }
 
