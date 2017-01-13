@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -13,9 +14,10 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
- * Created by dam2 on 13/01/2017.
+ * Created by Carlos on 12/01/2017.
  */
 
 public class CustomDialog extends DialogFragment implements View.OnClickListener{
@@ -28,6 +30,7 @@ public class CustomDialog extends DialogFragment implements View.OnClickListener
     private RadioButton radio1;
     private RadioButton radio2;
     private RadioButton radio3;
+    private RadioGroup radioGroup;
     private OnFragmentoDialogoListener escuchador;
     private int dificultad;
     private String nombre;
@@ -59,6 +62,8 @@ public class CustomDialog extends DialogFragment implements View.OnClickListener
         radio1 = (RadioButton) customDialog.findViewById(R.id.radioButton1);
         radio2 = (RadioButton) customDialog.findViewById(R.id.radioButton2);
         radio3 = (RadioButton) customDialog.findViewById(R.id.radioButton3);
+        radioGroup = (RadioGroup) customDialog.findViewById(R.id.radioGroup) ;
+        radioGroup.check(R.id.radioButton1);
 
         buttonJugar.setOnClickListener(this);
         buttonVolver.setOnClickListener(this);
@@ -73,6 +78,9 @@ public class CustomDialog extends DialogFragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
         if(view.getId() == R.id.buttonJugar) {
+            if(editTextNombre.getText().toString().isEmpty()){
+                Toast.makeText(getActivity(), "El nombre no puede estar vacío.", Toast.LENGTH_SHORT).show();
+            }else{
             if(radio1.isChecked()){
                 this.dificultad = 1 ;
             }else if(radio2.isChecked()){
@@ -85,8 +93,10 @@ public class CustomDialog extends DialogFragment implements View.OnClickListener
             escuchador.onOpcionElegida(nombre,dificultad);
             dismiss();
         }
+        }
+
         if(view.getId() == R.id.buttonVolver) {
-            //Boton Volver
+            getActivity().finish();
         }
     }
 

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center">
@@ -9,13 +10,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textViewTexto1"
-        android:gravity="center" />
+        android:gravity="center"
+        android:textColor="@color/colorAccentSecondary" />
 
     <TextView
         android:text="@string/nombre"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textViewNombre" />
+        android:id="@+id/textViewNombre"
+        android:textColor="@color/colorAccent" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -29,19 +32,17 @@
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/radioGroup">
+        android:id="@+id/radioGroup"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+
 
             <RadioButton
                 android:text="@string/radioButton1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radioButton1"
+                android:checked="true"
                 android:layout_weight="1" />
 
             <RadioButton
@@ -58,7 +59,7 @@
                 android:id="@+id/radioButton3"
                 android:layout_weight="1" />
 
-        </LinearLayout>
+
 
     </RadioGroup>
 

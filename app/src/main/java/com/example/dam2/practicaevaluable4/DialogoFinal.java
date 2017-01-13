@@ -3,62 +3,84 @@ package com.example.dam2.practicaevaluable4;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Created by dam2 on 13/01/2017.
+ * Created by Carlos on 12/01/2017.
  */
 
-public class DialogoFinal extends DialogFragment implements DialogInterface.OnClickListener {
+public class DialogoFinal extends DialogFragment implements View.OnClickListener {
 
-    private OnFragmentoDialogoListener escuchador;
+    private OnFinalDialogoListener escuchador;
     private int faseFinal;
+    private String nombre;
 
-    //Constructor newInstance para poder pasarle el alumno
-    public DialogoFinal newInstance(int fase) {
+    private TextView textViewNombre;
+    private TextView textViewFase;
+    private Button buttonCerrar;
+    private Button buttonReiniciar;
+
+    public static DialogoFinal newInstance(int fase, String nombre) {
         DialogoFinal fragment = new DialogoFinal();
-        this.faseFinal = fase;
+        fragment.faseFinal=fase;
+        fragment.nombre= nombre;
         return fragment;
     }
 
-    @Override
+
+
+
     public Dialog onCreateDialog(Bundle savedInstanceState) {
 
-        //Construyo y devuelvo el diálogo
-        //Primero genero un constructor de diálogos de alerta
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setMessage("El juego ha terminado.\nHa llegado al nivel " + faseFinal);
+
+        View finalDialog = getActivity().getLayoutInflater().inflate(R.layout.final_dialog, null);
+
+        textViewNombre = (TextView) finalDialog.findViewById(R.id.textViewNombre);
+        textViewFase = (TextView) finalDialog.findViewById(R.id.textViewFase);
+        buttonCerrar = (Button) finalDialog.findViewById(R.id.buttonCerrar);
+        buttonReiniciar = (Button) finalDialog.findViewById(R.id.buttonReiniciar);
+
+        buttonCerrar.setOnClickListener(this);
+        buttonReiniciar.setOnClickListener(this);
+
+        textViewNombre.setText("El juego ha terminado "+nombre);
+        textViewFase.setText("Ha llegado al nivel " + faseFinal);
         builder.setTitle("Game Over");
+        builder.setView(finalDialog);
 
-        builder.setPositiveButton(R.string.string_boton_positivo, (DialogInterface.OnClickListener) this);
 
-        builder.setNegativeButton(R.string.string_boton_negativo, (DialogInterface.OnClickListener) this);
 
         //Devuelvo el AlertDialog ya configurado
         return builder.create();
     }
 
     @Override
-    public void onClick(DialogInterface dialog, int which) {
-        if (which == DialogInterface.BUTTON_POSITIVE){
-            //Si existe una actividad suscrita, llamo a su método relacionado con mi evento
-            if (escuchador != null){
-                escuchador.onFinDelJuego();
-            }
+    public void onClick(View view) {
+        if (view.getId() == R.id.buttonCerrar){
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            startActivity(intent);
         }
-        else if (which == DialogInterface.BUTTON_NEGATIVE){
+        else if (view.getId() == R.id.buttonReiniciar){
+            Intent intent = new Intent(getActivity(), SecondActivity.class);
+            startActivity(intent);
         }
     }
 
 
-    public interface OnFragmentoDialogoListener {
-        void onFinDelJuego();
+    public interface OnFinalDialogoListener {
+
     }
 
     //Método con el cual las actividades se nos suscribirán a nuestros eventos
-    public void setOnFinalDialogoListener (OnFragmentoDialogoListener escuchador) {
+    public void setOnFinalDialogoListener (OnFinalDialogoListener escuchador) {
         this.escuchador = escuchador;
     }
 

@@ -9,7 +9,7 @@
     <string name="radioButton3">Experto</string>
     <string name="volver">Volver</string>
     <string name="jugar">Jugar</string>
-    <string name="string_boton_positivo">Positive</string>
-    <string name="string_boton_negativo">Negative</string>
+    <string name="string_boton_positivo">Volver a jugar</string>
+    <string name="string_boton_negativo">Cerrar</string>
 
 </resources>

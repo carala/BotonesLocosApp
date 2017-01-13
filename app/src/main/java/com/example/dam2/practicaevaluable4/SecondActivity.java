@@ -16,7 +16,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class SecondActivity extends AppCompatActivity implements View.OnClickListener, CustomDialog.OnFragmentoDialogoListener, DialogoFinal.OnFragmentoDialogoListener{
+public class SecondActivity extends AppCompatActivity implements View.OnClickListener, CustomDialog.OnFragmentoDialogoListener{
 
     private TextView textViewUsuario;
     private TextView textViewFase;
@@ -37,8 +37,8 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     private int fase = 1;
     private int faseFinal;
 
-    CustomDialog customDialog;
-    DialogoFinal finalDialog;
+    private CustomDialog customDialog;
+    private DialogoFinal finalDialog;
 
     private MyAsyncTask task;
 
@@ -138,19 +138,13 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         task = new MyAsyncTask();
         task.execute(tiempo);
 
-        //Peta aqui
-        finalDialog.newInstance(faseFinal);
-        finalDialog.setOnFinalDialogoListener(this);
-        finalDialog.show(getFragmentManager(),null);
+
 
     }
 
-    @Override
-    public void onFinDelJuego() {
 
-    }
 
-    private class MyAsyncTask extends AsyncTask<Integer, Integer, Integer> {
+    private class MyAsyncTask extends AsyncTask<Integer, Integer, Integer> implements DialogoFinal.OnFinalDialogoListener{
         private int i = 0 ;
 
         @Override
@@ -186,6 +180,14 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             faseFinal = fase;
             fase = 0 ;
 
+            //Creo un nuevo fragmento diálogo pásandole el alumno
+            finalDialog = DialogoFinal.newInstance(faseFinal, textViewUsuario.getText().toString());
+            //Me suscribo a los eventos del fragmento
+            finalDialog.setOnFinalDialogoListener(this);
+            //Muestro el fragmento diálogo
+            finalDialog.show(getFragmentManager(), null);
+
+
             Toast.makeText(SecondActivity.this, "Fin del juego", Toast.LENGTH_LONG).show();
 
         }
@@ -209,6 +211,8 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         protected void onCancelled() {
             super.onCancelled();
             progreso =0 ;
+            fase = fase + 1;
+            textViewFase.setText("Fase " + fase);
             contadorBotones = 1 ;
             tiempo = tiempo - 10;
             task = new MyAsyncTask();
