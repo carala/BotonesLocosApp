@@ -34,6 +34,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     private int contadorBotones;
     private final int n = 4 ;
     private int tiempo = 100;
+    private int fase = 1;
 
     private MyAsyncTask task;
 
@@ -162,6 +163,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             numerarBotones(generarArrayAleatorio(n));
             progreso = 0;
             progressBar.setProgress(progreso);
+            textViewFase.setText()
             textViewProgreso.setText(progreso + " / 100");
         }
 

@@ -24,13 +24,14 @@ public class CustomDialog extends DialogFragment implements View.OnClickListener
     private TextView texto1;
     private TextView textViewNombre;
     private EditText editTextNombre;
-    private RadioGroup grupoBotones;
+   //private RadioGroup grupoBotones;
     private RadioButton radio1;
     private RadioButton radio2;
     private RadioButton radio3;
     private OnFragmentoDialogoListener escuchador;
     private int dificultad;
     private String nombre;
+   //private AlertDialog dialog;
 
 
     public static CustomDialog newInstance() {
@@ -50,23 +51,22 @@ public class CustomDialog extends DialogFragment implements View.OnClickListener
 
         View customDialog = getActivity().getLayoutInflater().inflate(R.layout.custom_dialog, null);
 
-        buttonJugar = (Button) getActivity().findViewById(R.id.buttonJugar);
-        buttonVolver = (Button) getActivity().findViewById(R.id.buttonVolver);
-        texto1 = (TextView) getActivity().findViewById(R.id.textViewTexto1);
-        textViewNombre = (TextView) getActivity().findViewById(R.id.textViewNombre);
-        editTextNombre = (EditText) getActivity().findViewById(R.id.editTextNombre);
-        grupoBotones = (RadioGroup) getActivity().findViewById(R.id.radioGroup);
-        radio1 = (RadioButton) getActivity().findViewById(R.id.radioButton1);
-        radio2 = (RadioButton) getActivity().findViewById(R.id.radioButton2);
-        radio3 = (RadioButton) getActivity().findViewById(R.id.radioButton3);
-
+        buttonJugar = (Button) customDialog.findViewById(R.id.buttonJugar);
+        buttonVolver = (Button) customDialog.findViewById(R.id.buttonVolver);
+        texto1 = (TextView) customDialog.findViewById(R.id.textViewTexto1);
+        textViewNombre = (TextView) customDialog.findViewById(R.id.textViewNombre);
+        editTextNombre = (EditText) customDialog.findViewById(R.id.editTextNombre);
+        //grupoBotones = (RadioGroup) getActivity().findViewById(R.id.radioGroup);
+        radio1 = (RadioButton) customDialog.findViewById(R.id.radioButton1);
+        radio2 = (RadioButton) customDialog.findViewById(R.id.radioButton2);
+        radio3 = (RadioButton) customDialog.findViewById(R.id.radioButton3);
         buttonJugar.setOnClickListener(this);
         buttonVolver.setOnClickListener(this);
 
         builder.setView(customDialog);
 
-        AlertDialog dialog = builder.setTitle("Botones Locos").create();
-        dialog.setCanceledOnTouchOutside(false);
+       /* dialog = builder.setTitle("Botones Locos").create();
+        dialog.setCanceledOnTouchOutside(false);*/
 
         //Devuelvo el AlertDialog ya configurado
         return builder.create();
