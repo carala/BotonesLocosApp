@@ -66,6 +66,7 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
         contadorBotones = 1;
 
+        
         task = new MyAsyncTask();
         task.execute(tiempo);
 

@@ -2,5 +2,12 @@
     <string name="app_name">Practica Evaluable 4</string>
     <string name="instrucciones">Instrucciones:\nPara superar cada nivel sera necesario que demuestres tu velocidad haciendo pulsando en los diferentes botones en el orden correcto.\nPero date prisa porque cada vez tendrás menos tiempo...</string>
     <string name="instrucciones2">Para empezar el juego...\n¡Pulsa el gran botón rojo!</string>
+    <string name="textViewTexto1">Texto 1</string>
+    <string name="nombre">Escribe tu nombre:</string>
+    <string name="radioButton1">Principiante</string>
+    <string name="radioButton2">Medio</string>
+    <string name="radioButton3">Experto</string>
+    <string name="volver">Volver</string>
+    <string name="jugar">Jugar</string>
 
 </resources>
