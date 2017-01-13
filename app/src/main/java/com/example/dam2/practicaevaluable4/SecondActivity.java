@@ -16,7 +16,7 @@ import org.w3c.dom.Text;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class SecondActivity extends AppCompatActivity implements View.OnClickListener, CustomDialog.OnFragmentoDialogoListener{
+public class SecondActivity extends AppCompatActivity implements View.OnClickListener, CustomDialog.OnFragmentoDialogoListener, DialogoFinal.OnFragmentoDialogoListener{
 
     private TextView textViewUsuario;
     private TextView textViewFase;
@@ -35,6 +35,10 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
     private final int n = 4 ;
     private int tiempo = 100;
     private int fase = 1;
+    private int faseFinal;
+
+    CustomDialog customDialog;
+    DialogoFinal finalDialog;
 
     private MyAsyncTask task;
 
@@ -68,10 +72,9 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         contadorBotones = 1;
 
 
-        CustomDialog customDialog = CustomDialog.newInstance();
+        customDialog = CustomDialog.newInstance();
         customDialog.setOnFragmentoDialogoListener(this);
         customDialog.show(getFragmentManager(),null);
-
 
 
 
@@ -137,6 +140,11 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    @Override
+    public void onFinDelJuego() {
+
+    }
+
     private class MyAsyncTask extends AsyncTask<Integer, Integer, Integer> {
         private int i = 0 ;
 
@@ -163,13 +171,22 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             numerarBotones(generarArrayAleatorio(n));
             progreso = 0;
             progressBar.setProgress(progreso);
-            textViewFase.setText()
+            textViewFase.setText("Fase " + fase);
             textViewProgreso.setText(progreso + " / 100");
         }
 
         @Override
         protected void onPostExecute(Integer integer) {
             descativarBotones();
+            faseFinal = fase;
+            fase = 0 ;
+
+            /*finalDialog.newInstance(faseFinal);
+            finalDialog.setOnFinalDialogoListener((DialogoFinal.OnFragmentoDialogoListener) this);
+            finalDialog.show(getFragmentManager(),null);*/
+
+
+
             Toast.makeText(SecondActivity.this, "Fin del juego", Toast.LENGTH_LONG).show();
 
         }

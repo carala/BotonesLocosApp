@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,14 +25,12 @@ public class CustomDialog extends DialogFragment implements View.OnClickListener
     private TextView texto1;
     private TextView textViewNombre;
     private EditText editTextNombre;
-   //private RadioGroup grupoBotones;
     private RadioButton radio1;
     private RadioButton radio2;
     private RadioButton radio3;
     private OnFragmentoDialogoListener escuchador;
     private int dificultad;
     private String nombre;
-   //private AlertDialog dialog;
 
 
     public static CustomDialog newInstance() {
@@ -56,17 +55,16 @@ public class CustomDialog extends DialogFragment implements View.OnClickListener
         texto1 = (TextView) customDialog.findViewById(R.id.textViewTexto1);
         textViewNombre = (TextView) customDialog.findViewById(R.id.textViewNombre);
         editTextNombre = (EditText) customDialog.findViewById(R.id.editTextNombre);
-        //grupoBotones = (RadioGroup) getActivity().findViewById(R.id.radioGroup);
+
         radio1 = (RadioButton) customDialog.findViewById(R.id.radioButton1);
         radio2 = (RadioButton) customDialog.findViewById(R.id.radioButton2);
         radio3 = (RadioButton) customDialog.findViewById(R.id.radioButton3);
+
         buttonJugar.setOnClickListener(this);
         buttonVolver.setOnClickListener(this);
 
         builder.setView(customDialog);
-
-       /* dialog = builder.setTitle("Botones Locos").create();
-        dialog.setCanceledOnTouchOutside(false);*/
+        builder.setTitle("Botones Locos");
 
         //Devuelvo el AlertDialog ya configurado
         return builder.create();
@@ -86,6 +84,9 @@ public class CustomDialog extends DialogFragment implements View.OnClickListener
 
             escuchador.onOpcionElegida(nombre,dificultad);
             dismiss();
+        }
+        if(view.getId() == R.id.buttonVolver) {
+            //Boton Volver
         }
     }
 
