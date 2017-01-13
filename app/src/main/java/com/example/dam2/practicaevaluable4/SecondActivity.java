@@ -138,6 +138,11 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
         task = new MyAsyncTask();
         task.execute(tiempo);
 
+        //Peta aqui
+        finalDialog.newInstance(faseFinal);
+        finalDialog.setOnFinalDialogoListener(this);
+        finalDialog.show(getFragmentManager(),null);
+
     }
 
     @Override
@@ -180,12 +185,6 @@ public class SecondActivity extends AppCompatActivity implements View.OnClickLis
             descativarBotones();
             faseFinal = fase;
             fase = 0 ;
-
-            /*finalDialog.newInstance(faseFinal);
-            finalDialog.setOnFinalDialogoListener((DialogoFinal.OnFragmentoDialogoListener) this);
-            finalDialog.show(getFragmentManager(),null);*/
-
-
 
             Toast.makeText(SecondActivity.this, "Fin del juego", Toast.LENGTH_LONG).show();
 
